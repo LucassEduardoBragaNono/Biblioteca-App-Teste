@@ -259,4 +259,4 @@ Código-fonte da videoula: [5ef9483](https://github.com/tiagotas/Biblioteca/tree
 - 54:46 Conclusão e agradecimentos
 
 ## CURTIU MEU TRABALHO?
-Você pode me ajudar com um pix para tiago@tiago.blog.br 🍻
+Você pode me ajudar com um pix para tiago@tiago.blog.br 🍻.
