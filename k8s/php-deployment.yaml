@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php
+  template:
+    metadata:
+      labels:
+        app: php
+    spec:
+      containers:
+        - name: php
+          image: lucasnono/biblioteca_php:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          env:
+            - name: DB_HOST
+              value: "mysql"
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_USER
+              value: "fatec"
+            - name: DB_PASSWORD
+              value: "fatec"
+            - name: DB_NAME
+              value: "db_biblioteca"
+          volumeMounts:
+            - name: php-src
+              mountPath: /var/www/html
+      volumes:
+        - name: php-src
+          persistentVolumeClaim:
+            claimName: php-pvc
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: php
+  labels:
+    app: php
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30080
+  selector:
+    app: php
